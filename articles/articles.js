@@ -30,6 +30,19 @@ app.get('/articles', (req, res) => {
     })
 })
 
+
+app.get('/article/:id', (req, res) => {
+    Article.findById(req.params.id).then(article => {
+        if (article) {
+            return res.json(article)
+        } else {
+            res.statusCode(404)
+        }
+    }).catch(err => {
+        return res.send('err');
+    })
+})
+
 app.listen(7777, () => {
     console.log("Up and running --- articles ms");
 })
